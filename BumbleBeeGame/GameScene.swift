@@ -24,6 +24,7 @@ class GameScene: SKScene{
     var background2: Background?
     var green1: Green?
     var green2: Green?
+    var flower: Flower?
     var owl: Owl?
     
   //  var degToRad = 0.01745329252
@@ -33,9 +34,6 @@ class GameScene: SKScene{
     var counter:Int = 1   // count a number of frames when user presses the screen
     
     override func didMove(to view: SKView) {
-        
-//        screenWidth = frame.width
-//        screenHeight = frame.height
         
         let image = UIImage(named: "sky")
         scale = CGFloat(screenSize.size.height) / CGFloat((image?.size.height)!)
@@ -58,24 +56,28 @@ class GameScene: SKScene{
         green1 = Green(scale)
         green1?.position.x = 0
         green1?.position.y = 0
-        green1?.zPosition = 0
+        green1?.zPosition = 1
         addChild(green1!)
         
         // add green2 subbackground to scene
         green2 = Green(scale)
         green2?.position.x = (green2?.size.width)!
         green2?.position.y = 0
-        green2?.zPosition = 0
+        green2?.zPosition = 1
         addChild(green2!)
         
         owl = Owl()
         addChild(owl!)
+        owl!.animate()
+        
+        flower = Flower()
+        addChild(flower!)
         
         // add bumbleBee to scene
         bumbleBee = BumbleBee()
-        //plane?.position = CGPoint(x: 0.0, y: -500.0)
         bumbleBee?.position = CGPoint(x: -300.0, y: 0.0)
         addChild(bumbleBee!)
+       bumbleBee!.animate()
         
         
     }
@@ -112,6 +114,7 @@ class GameScene: SKScene{
         green1?.Update(currentTime)
         green2?.Update(currentTime)
         owl?.Update(currentTime)
+        flower?.Update(currentTime)
         bumbleBee?.Update(currentTime)
     }
     

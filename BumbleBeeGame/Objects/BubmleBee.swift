@@ -7,14 +7,34 @@ class BumbleBee : GameObject {
     var verticalSpeed: Float = 0
     var verticalForce: Float = 0
     
+    var center: CGPoint = CGPoint(x: -270, y: 0.0)
+    
+    private var beeFlyFrames: [SKTexture] = []
+    private var beeHitFrames: [SKTexture] = []
+    
     init() {
-        super.init(imageString: "bumbleBee", initialScale: 0.5)
+        let beeAnimatedAtlas = SKTextureAtlas(named: "BeeImages")
+        var beeFrames: [SKTexture] = []
+        
+        let numImages = beeAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let beeTextureName = "bee\(i)"
+            beeFrames.append(beeAnimatedAtlas.textureNamed(beeTextureName))
+        }
+        beeFlyFrames = beeFrames
+        
+        let firstFrameTexture = beeFlyFrames[0]
+        super.init(texture: firstFrameTexture, initialScale: 0.5)
         self.Start()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+
     
     override func Start() {
         self.zPosition = 2
@@ -36,20 +56,8 @@ class BumbleBee : GameObject {
     override func Update(_ currentTime: TimeInterval) {
         verticalForce = -graviry + forceUp
         verticalSpeed = verticalSpeed + verticalForce
-        //self.position.y = self.position.y + CGFloat(verticalSpeed)
         let y = self.position.y + CGFloat(verticalSpeed)
         
-        // check the top boundary
-//        if(y > screenSize.height / 2  - self.halfHeight!) {
-//            self.position.y = screenSize.height / 2 - self.halfHeight!
-//            verticalSpeed = 0
-//        } else if(y < -screenSize.height / 2 + self.halfHeight!) {
-//            // check the bottom boundary
-//            self.position.y = -screenSize.height / 2 + self.halfHeight!
-//            verticalSpeed = 0
-//        } else {
-//            self.position.y = y
-//        }
         
         if(y > screenSize.height / 2 - self.halfHeight!) {
             self.position.y = screenSize.height / 2 - self.halfHeight!
@@ -63,5 +71,14 @@ class BumbleBee : GameObject {
         }
         
         //CheckBounds(y)
+    }
+    
+    func animate() {
+        self.run(SKAction.repeatForever(
+            SKAction.animate(with: beeFlyFrames,
+                             timePerFrame: 0.1,
+                             resize: false,
+                             restore: true)),
+                 withKey:"flyBee")
     }
 }

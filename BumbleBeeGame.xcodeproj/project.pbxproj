@@ -27,6 +27,11 @@
 		C0A3F8F722089DCA0044FA46 /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = C0A3F8F622089DCA0044FA46 /* sky.png */; };
 		C0A3F8F922089DDF0044FA46 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = C0A3F8F822089DDF0044FA46 /* green.png */; };
 		C0E3E4752208BE46003B85CE /* Green.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E3E4742208BE46003B85CE /* Green.swift */; };
+		C0E3E4772208C386003B85CE /* Flower.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E3E4762208C386003B85CE /* Flower.swift */; };
+		C0E3E4792208C39E003B85CE /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E3E4782208C39E003B85CE /* flower.png */; };
+		C0E3E47B2208C7AD003B85CE /* OwlImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C0E3E47A2208C7AD003B85CE /* OwlImages.atlas */; };
+		C0E3E47F2208D9B1003B85CE /* BeeImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C0E3E47D2208D2C4003B85CE /* BeeImages.atlas */; };
+		C0E3E4802208D9C3003B85CE /* BeeHitImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C0E3E47C2208D2C0003B85CE /* BeeHitImages.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		C0A3F8F622089DCA0044FA46 /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		C0A3F8F822089DDF0044FA46 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		C0E3E4742208BE46003B85CE /* Green.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Green.swift; sourceTree = "<group>"; };
+		C0E3E4762208C386003B85CE /* Flower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flower.swift; sourceTree = "<group>"; };
+		C0E3E4782208C39E003B85CE /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
+		C0E3E47A2208C7AD003B85CE /* OwlImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = OwlImages.atlas; sourceTree = "<group>"; };
+		C0E3E47C2208D2C0003B85CE /* BeeHitImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BeeHitImages.atlas; sourceTree = "<group>"; };
+		C0E3E47D2208D2C4003B85CE /* BeeImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BeeImages.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,9 @@
 				C02976B622014E54002AF02E /* Assets.xcassets */,
 				C02976B822014E54002AF02E /* LaunchScreen.storyboard */,
 				C02976BB22014E54002AF02E /* Info.plist */,
+				C0E3E47D2208D2C4003B85CE /* BeeImages.atlas */,
+				C0E3E47C2208D2C0003B85CE /* BeeHitImages.atlas */,
+				C0E3E47A2208C7AD003B85CE /* OwlImages.atlas */,
 				C02976E92201514F002AF02E /* images */,
 			);
 			path = BumbleBeeGame;
@@ -105,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C02976C222014E6C002AF02E /* Owl.swift */,
+				C0E3E4762208C386003B85CE /* Flower.swift */,
 				C0E3E4742208BE46003B85CE /* Green.swift */,
 				C02976C322014E6C002AF02E /* GameProtocol.swift */,
 				C02976C422014E6C002AF02E /* GameObject.swift */,
@@ -120,6 +134,7 @@
 				C0A3F8F622089DCA0044FA46 /* sky.png */,
 				C0A3F8F822089DDF0044FA46 /* green.png */,
 				C02976EA2201514F002AF02E /* bumbleBee.png */,
+				C0E3E4782208C39E003B85CE /* flower.png */,
 				C02976EB2201514F002AF02E /* owl.png */,
 			);
 			path = images;
@@ -185,8 +200,12 @@
 			files = (
 				C02976B522014E53002AF02E /* Main.storyboard in Resources */,
 				C02976ED2201514F002AF02E /* bumbleBee.png in Resources */,
+				C0E3E47B2208C7AD003B85CE /* OwlImages.atlas in Resources */,
 				C02976AC22014E53002AF02E /* GameScene.sks in Resources */,
+				C0E3E47F2208D9B1003B85CE /* BeeImages.atlas in Resources */,
 				C02976E622014ED5002AF02E /* StartScene.sks in Resources */,
+				C0E3E4802208D9C3003B85CE /* BeeHitImages.atlas in Resources */,
+				C0E3E4792208C39E003B85CE /* flower.png in Resources */,
 				C02976B722014E54002AF02E /* Assets.xcassets in Resources */,
 				C02976BA22014E54002AF02E /* LaunchScreen.storyboard in Resources */,
 				C0A3F8F722089DCA0044FA46 /* sky.png in Resources */,
@@ -208,6 +227,7 @@
 				C02976C822014E6D002AF02E /* GameProtocol.swift in Sources */,
 				C02976C922014E6D002AF02E /* GameObject.swift in Sources */,
 				C02976B222014E53002AF02E /* GameViewController.swift in Sources */,
+				C0E3E4772208C386003B85CE /* Flower.swift in Sources */,
 				C0E3E4752208BE46003B85CE /* Green.swift in Sources */,
 				C02976C722014E6D002AF02E /* Owl.swift in Sources */,
 				C02976CB22014E6D002AF02E /* BubmleBee.swift in Sources */,
