@@ -7,7 +7,7 @@ class BumbleBee : GameObject {
     var verticalSpeed: Float = 0
     var verticalForce: Float = 0
     
-    var center: CGPoint = CGPoint(x: -270, y: 0.0)
+    var center: CGPoint = CGPoint(x: -screenSize.width/2 + 100, y: 0.0)
     
     private var beeFlyFrames: [SKTexture] = []
     private var beeHitFrames: [SKTexture] = []
@@ -26,51 +26,63 @@ class BumbleBee : GameObject {
         let firstFrameTexture = beeFlyFrames[0]
         super.init(texture: firstFrameTexture, initialScale: 0.5)
         self.Start()
-
+        
+        let beeHitAtlas = SKTextureAtlas(named: "BeeHitImages")
+        var hitFrames: [SKTexture] = []
+        
+        let numHitImages = beeHitAtlas.textureNames.count
+        for i in 1...numHitImages {
+            let beeHitTextureName = "beehit\(i)"
+            hitFrames.append(beeHitAtlas.textureNamed(beeHitTextureName))
+        }
+        beeHitFrames = hitFrames
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-
-    
     override func Start() {
         self.zPosition = 2
     }
     
-    
-    override func CheckBounds() {
-        // check the top boundary
-        if(self.position.y > screenSize.height - self.halfHeight!) {
-            self.position.y = screenSize.height - self.halfHeight!
-        }
-        
-        // check the bottom boundary
-        if(self.position.y < -screenSize.height + self.halfHeight!) {
-            self.position.y = -screenSize.height + self.halfHeight!
-        }
+    func getAngle(_ currentTime: TimeInterval) -> Double{
+        let integerPart = Int(currentTime)
+        let floatPart = currentTime - Double(integerPart)
+        let angle = 2 * Double.pi * floatPart
+        return angle
     }
     
     override func Update(_ currentTime: TimeInterval) {
+        let angle = getAngle(currentTime)
+        
+        let xObj = 25 * CGFloat(sin(angle))
+        let yObj = 25 * CGFloat(cos(angle))
+        
         verticalForce = -graviry + forceUp
         verticalSpeed = verticalSpeed + verticalForce
-        let y = self.position.y + CGFloat(verticalSpeed)
         
+        
+        self.center.y =  self.center.y + CGFloat(verticalSpeed)
+        let y = self.center.y + yObj
         
         if(y > screenSize.height / 2 - self.halfHeight!) {
             self.position.y = screenSize.height / 2 - self.halfHeight!
-            verticalSpeed = 0
+            if verticalSpeed > 0 {
+                verticalSpeed = 0
+            }
+            verticalForce = -graviry
         } else if(y < -screenSize.height / 2 + self.halfHeight!) {
             // check the bottom boundary
             self.position.y = -screenSize.height / 2 + self.halfHeight!
-            verticalSpeed = 0
+            if verticalSpeed < 0 {
+                verticalSpeed = 0
+            }
+            verticalForce = -graviry
         } else {
             self.position.y = y
         }
-        
-        //CheckBounds(y)
+        self.position.x = self.center.x + xObj
     }
     
     func animate() {
@@ -81,4 +93,14 @@ class BumbleBee : GameObject {
                              restore: true)),
                  withKey:"flyBee")
     }
+    
+    func animateHit() {
+        self.run(SKAction.repeatForever(
+            SKAction.animate(with: beeHitFrames,
+                             timePerFrame: 0.1,
+                             resize: false,
+                             restore: true)),
+                 withKey:"hitBee")
+    }
 }
+
