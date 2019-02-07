@@ -13,10 +13,12 @@ class InstructionsScene: SKScene {
     override func didMove(to view: SKView) {
         
         backToMenuButton = childNode(withName: "backToMenu") as! SKLabelNode
-        
+        backToMenuButton.fontName = "Futura-Bold"
+       
         instructionsTextLabel = childNode(withName: "instructionsText") as! SKLabelNode
+        instructionsTextLabel.fontName = "Futura-Bold"
 //        
-        instructionsTextLabel.text = "'BumbleBee' is an arcade game displays 'BumbleBee' character that has a purpose to pick up a maximum number of bonus 'Flowers'. BumbleBee should not contact enemies Owls, otherwise score points are deducted.  If user scores less then top level scores by the end of the time limit or fall to '0' the user loses and the game is over. If user exceeds max scores at the end of the time limit the user wins and reached scores set as a top amount"
+        instructionsTextLabel.text = "The goal of the “BumbleBee” arcade Game is exceeding top level score within limited time.  “BumbleBee” is a main character of the game.  The game scores are increasing while “BumbleBee” picks up “Flowers” and deducting while “BumbleBee” collides with enemies - “Owls”. Winning condition gains when user exceeds top scores within time limit, otherwise the user loses."
         instructionsTextLabel.numberOfLines = 0
         instructionsTextLabel.preferredMaxLayoutWidth = 600
         

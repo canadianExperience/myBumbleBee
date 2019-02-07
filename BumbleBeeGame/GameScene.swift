@@ -103,28 +103,25 @@ class GameScene: SKScene{
             bumbleBee!.animate()
         }
         
-//        let action1 = SKAction.wait(forDuration: 0.2)
-//        let action2 = SKAction.repeatForever(SKAction.playSoundFileNamed("bee.wav", waitForCompletion: true))
-//        self.run(SKAction.sequence([
-//            action1,
-//            action2
-//            ])
-//        )
         
         timerLabel = self.childNode(withName: "timer") as? SKLabelNode
         timerLabel?.text = "\(Int(timer))"
         timerLabel?.position = CGPoint(x: screenSize.width / 2 - 15, y: screenSize.size.height / 2 - 30)
         timerLabel?.zPosition = 3
+        timerLabel?.fontName = "Futura-Bold"
+        
         
         lifeLabel = self.childNode(withName: "life") as? SKLabelNode
         lifeLabel?.text = "Life: \(Int(lives))"
         lifeLabel?.position = CGPoint(x: screenSize.width / 2 - 90, y: screenSize.size.height / 2 - 30)
         lifeLabel?.zPosition = 3
+        lifeLabel?.fontName = "Futura-Bold"
         
         scoreLabel = self.childNode(withName: "score") as? SKLabelNode
         scoreLabel?.text = "Score: \(Int(score)) / \(Int(highScore))"
         scoreLabel?.position = CGPoint(x: screenSize.width / 2 - 215, y: screenSize.size.height / 2 - 30)
         scoreLabel?.zPosition = 3
+        scoreLabel?.fontName = "Futura-Bold"
         
     }
     

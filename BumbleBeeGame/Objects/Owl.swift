@@ -20,17 +20,14 @@ class Owl : GameObject {
         
         let firstFrameTexture = owlFrames[0]
         super.init(texture: firstFrameTexture, initialScale: 1.0)
-//        super.init(imageString: "owl", initialScale: 1.0)
         self.Start()
     }
-    
     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+        
     // class functions
     func animate() {
         self.run(SKAction.repeatForever(

@@ -15,6 +15,7 @@ class GameOverScene: SKScene{
     var topScoreLabel: SKLabelNode?
     var menuButton: SKLabelNode?
     var quitButton: SKLabelNode?
+    var playAgainButton: SKLabelNode?
     
     let screenSize = UIScreen.main.bounds
     var scale: CGFloat = 0
@@ -60,15 +61,17 @@ class GameOverScene: SKScene{
         messageLabel?.text = message
         messageLabel?.verticalAlignmentMode = .center
         messageLabel?.horizontalAlignmentMode = .center
-        messageLabel?.position = CGPoint(x: 0, y: 0)
+        messageLabel?.position = CGPoint(x: 0, y: screenSize.size.height / 2 - 160)
         messageLabel?.zPosition = 1
+        messageLabel?.fontName = "Futura-Bold"
         
         yourScoreLabel = self.childNode(withName: "yourScore") as? SKLabelNode
         yourScoreLabel?.text = "Your Score: \(score)"
         yourScoreLabel?.verticalAlignmentMode = .center
         yourScoreLabel?.horizontalAlignmentMode = .center
         yourScoreLabel?.position = CGPoint(x: -screenSize.width / 2 + 120, y: screenSize.size.height / 2 - 50)
-       yourScoreLabel?.zPosition = 1
+        yourScoreLabel?.zPosition = 1
+        yourScoreLabel?.fontName = "Futura-Bold"
         
         topScoreLabel = self.childNode(withName: "topScore") as? SKLabelNode
         topScoreLabel?.text = "Top Score: \(topScore)"
@@ -76,13 +79,15 @@ class GameOverScene: SKScene{
         topScoreLabel?.horizontalAlignmentMode = .center
         topScoreLabel?.position = CGPoint(x: screenSize.width / 2 - 120, y: screenSize.size.height / 2 - 50)
         topScoreLabel?.zPosition = 1
+        topScoreLabel?.fontName = "Futura-Bold"
         
         menuButton = self.childNode(withName: "toStartScene") as? SKLabelNode
         menuButton?.text = "Main Menu"
         menuButton?.verticalAlignmentMode = .center
         menuButton?.horizontalAlignmentMode = .center
         menuButton?.position = CGPoint(x: -screenSize.width / 2 + 120, y: -screenSize.size.height / 2 + 50)
-       menuButton?.zPosition = 1
+        menuButton?.zPosition = 1
+        menuButton?.fontName = "Futura-Bold"
         
         quitButton = self.childNode(withName: "quitGame") as? SKLabelNode
         quitButton?.text = "Quit Game"
@@ -90,6 +95,15 @@ class GameOverScene: SKScene{
         quitButton?.horizontalAlignmentMode = .center
         quitButton?.position = CGPoint(x: screenSize.width / 2 - 120, y:  -screenSize.size.height / 2 + 50)
         quitButton?.zPosition = 1
+        quitButton?.fontName = "Futura-Bold"
+        
+        playAgainButton = self.childNode(withName: "playAgain") as? SKLabelNode
+        playAgainButton?.text = "Play Again"
+        playAgainButton?.verticalAlignmentMode = .center
+        playAgainButton?.horizontalAlignmentMode = .center
+        playAgainButton?.position = CGPoint(x: 0, y:  -screenSize.size.height / 2 + 120)
+        playAgainButton?.zPosition = 1
+        playAgainButton?.fontName = "Futura-Bold"
         
         
     }
@@ -104,6 +118,15 @@ class GameOverScene: SKScene{
         
         for touch in touches {
             let location = touch.location(in: self)
+            
+            if atPoint(location).name == "playAgain" {
+                if let gameScene = StartScene(fileNamed: "GameScene") {
+                    gameScene.scaleMode = .aspectFill
+                    // view?.presentScene(startScene)
+                    play("button")
+                    view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 2))
+                }
+            }
             
             if atPoint(location).name == "toStartScene" {
                 if let startScene = StartScene(fileNamed: "StartScene") {
