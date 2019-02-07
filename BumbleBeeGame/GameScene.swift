@@ -17,6 +17,16 @@ var scale: CGFloat = 0
 
 class GameScene: SKScene{
     
+    var score = 0
+    var highScore = 0
+    var lives = 5
+    var timer: TimeInterval = 60 //3*60
+    var timeEnd: TimeInterval = 0
+    
+    var timerLabel: SKLabelNode?
+    var lifeLabel: SKLabelNode?
+    var scoreLabel: SKLabelNode?
+    
     var bumbleBee: BumbleBee?
     var background1: Background?
     var background2: Background?
@@ -24,9 +34,7 @@ class GameScene: SKScene{
     var green2: Green?
     var flower: Flower?
     var owl: Owl?
-    
-  //  var degToRad = 0.01745329252
-    
+
     var isPressed: Bool = false
     var forceUp: Float = 0  // calculate bee force up
     var counter:Int = 1   // count a number of frames when user presses the screen
@@ -37,6 +45,8 @@ class GameScene: SKScene{
     var hitTotalRotateAngle: Double = 0.0
     
     override func didMove(to view: SKView) {
+        
+         highScore = UserDefaults.standard.integer(forKey: "topScore")
         
         let image = UIImage(named: "sky")
         scale = CGFloat(screenSize.size.height) / CGFloat((image?.size.height)!)
@@ -78,7 +88,7 @@ class GameScene: SKScene{
         
         // add bumbleBee to scene
         bumbleBee = BumbleBee()
-        let xBee = -screenSize.size.width / 2 + (bumbleBee?.halfWidth)! + 50
+        let xBee = -screenSize.size.width / 2 + (bumbleBee?.halfWidth)! + 80
         bumbleBee?.position = CGPoint(x: xBee, y: 0.0)
         addChild(bumbleBee!)
         
@@ -86,6 +96,21 @@ class GameScene: SKScene{
             bumbleBee!.animate()
         }
         
+        
+        timerLabel = self.childNode(withName: "timer") as? SKLabelNode
+        timerLabel?.text = "\(Int(timer))"
+        timerLabel?.position = CGPoint(x: screenSize.width / 2 - 15, y: screenSize.size.height / 2 - 30)
+        timerLabel?.zPosition = 3
+        
+        lifeLabel = self.childNode(withName: "life") as? SKLabelNode
+        lifeLabel?.text = "Life: \(Int(lives))"
+        lifeLabel?.position = CGPoint(x: screenSize.width / 2 - 90, y: screenSize.size.height / 2 - 30)
+        lifeLabel?.zPosition = 3
+        
+        scoreLabel = self.childNode(withName: "score") as? SKLabelNode
+        scoreLabel?.text = "Score: \(Int(score)) / \(Int(highScore))"
+        scoreLabel?.position = CGPoint(x: screenSize.width / 2 - 215, y: screenSize.size.height / 2 - 30)
+        scoreLabel?.zPosition = 3
         
     }
     
@@ -98,10 +123,27 @@ class GameScene: SKScene{
         self.isPressed = false
     }
     
-    
+    func toGameOverScene(_ timeOut: Bool){
+        self.removeAllActions()
+        if let gameScene = GameOverScene(fileNamed: "GameOverScene") {
+            gameScene.scaleMode = .aspectFill
+            gameScene.score = score
+            gameScene.topScore = highScore
+            gameScene.timeOut = timeOut
+            gameScene.isAlive = lives > 0
+            view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 2))
+        }
+    }
     
     
     override func update(_ currentTime: TimeInterval) {
+        
+        if timeEnd == 0 {
+            timeEnd = currentTime + timer
+        } else if currentTime >= timeEnd {
+            self.run(SKAction.playSoundFileNamed("bee_pickup.mp3", waitForCompletion: false))
+            toGameOverScene(true)
+        }
         
         
         
@@ -151,7 +193,12 @@ class GameScene: SKScene{
             // Collision BumbleBee and Owl
             if isCollision(bumbleBee, owl) {
                 
-                owl!.verticalSpeed = -1
+                lives -= 1
+                if lives == 0 {
+                    toGameOverScene(false)
+                }
+                
+                owl!.verticalSpeed = -3
                 isHit = true
                 hitCurrentTime = currentTime
                 hitTotalRotateAngle = 0
@@ -167,6 +214,7 @@ class GameScene: SKScene{
             // Collision BumbleBee and Flower
             if isCollision(bumbleBee, flower) {
                 
+                score += 1
                 flower?.position.x = -1000
             }
         }
@@ -180,6 +228,10 @@ class GameScene: SKScene{
             owl?.Update(currentTime)
             flower?.Update(currentTime)
             bumbleBee?.Update(currentTime)
+        
+            timerLabel?.text = "\(Int(timeEnd-currentTime))"
+            lifeLabel?.text = "Life: \(Int(lives))"
+            scoreLabel?.text = "Score: \(Int(score)) / \(Int(highScore))"
             
             prevTime = currentTime
             
@@ -187,8 +239,6 @@ class GameScene: SKScene{
         }
         
             
-
-    
     
     func isCollision(_ obj1: GameObject?, _ obj2: GameObject?) -> Bool {
         if obj1 != nil && obj2 != nil {

@@ -17,7 +17,7 @@ class Flower : GameObject {
     
     override func Start() {
         //self.verticalSpeed = 10
-        self.horizontalSpeed = 8.0
+        self.horizontalSpeed = 2.0
         self.zPosition = 2
         self.Reset()
     }

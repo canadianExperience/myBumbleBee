@@ -13,41 +13,55 @@ import Foundation
 class StartScene: SKScene {
     
     var startButton: SKLabelNode!
-    //var settingsButton: SKLabelNode!
-    //var musicButton: SKLabelNode!
-    //var highScoreLabel: SKLabelNode!
-    //var oceanFloor: SKSpriteNode!
-    //var oceanFloor2: SKSpriteNode!
-    //var musicPlaylist: [String] = ["1asteroid", "2ugol", "3look", "4pair", "5crash"]
-    //var highscore = UserDefaults().integer(forKey: "highscore")
-    //var musicOn = UserDefaults().bool(forKey: "music")
+    var instructionsButton: SKLabelNode!
+    var gameNameLabel: SKLabelNode!
+    
+    let screenSize = UIScreen.main.bounds
+    var scale: CGFloat = 0
+    
+    var background1: Background?
+    var background2: Background?
+
+
+   
     
     
     override func didMove(to view: SKView) {
         
+        gameNameLabel = childNode(withName: "gameName") as! SKLabelNode
+        gameNameLabel.zPosition = 3
+        gameNameLabel.fontName = "Futura-Bold"
+        
         startButton = childNode(withName: "startGame") as! SKLabelNode
-        //musicButton = childNode(withName: "musicButton") as! SKLabelNode
-        //highScoreLabel = childNode(withName: "highScoreLabel") as! SKLabelNode
-        //highScoreLabel.text = "high score: \(highscore)"
+        startButton.zPosition = 3
+        startButton.fontName = "Futura-Bold"
+
+      
         
-        //oceanFloor = childNode(withName: "oceanFloor") as! SKSpriteNode
-        //oceanFloor2 = childNode(withName: "oceanFloor2") as! SKSpriteNode
+        instructionsButton = childNode(withName: "instructions") as! SKLabelNode
+        instructionsButton.zPosition = 3
+        instructionsButton.fontName = "Futura-Bold"
         
-        // add cycled movement to ocean floor
-        //let oceanMovement = SKAction.move(by:  CGVector(dx: -oceanFloor.size.width, dy: 0), duration: 10)
-        //let oceanReset = SKAction.move(by: CGVector(dx: oceanFloor.size.width, dy: 0), duration: 0)
-        //let oceanSequence = SKAction.repeatForever(SKAction.sequence([oceanMovement, oceanReset]))
-        //oceanFloor.run(oceanSequence)
-        //oceanFloor2.run(oceanSequence)
         
-        // Add background music randomly from the array and play
-        //let bgMusic = SKAudioNode(fileNamed: musicPlaylist[Int(arc4random_uniform(UInt32(musicPlaylist.count)))])
-        //bgMusic.autoplayLooped = true
-        //self.addChild(bgMusic)
+        
+        let image = UIImage(named: "sky")
+        scale = CGFloat(screenSize.size.height) / CGFloat((image?.size.height)!)
+        
+        // add the background1 to scene
+        background1 = Background(scale)
+        background1?.position.x = 0
+        background1?.position.y = 0
+        background1?.zPosition = 0
+        addChild(background1!)
+        
+        // add the background2 to scene
+        background2 = Background(scale)
+        background2?.position.x = (background2?.size.width)!
+        background2?.position.y = 0
+        background2?.zPosition = 0
+        addChild(background2!)
+        
     }
-    
-    // MARK: -- NAVIGATION BUTTONS --
-    // check which label was clicked and present the next scene accordingly
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -55,21 +69,25 @@ class StartScene: SKScene {
             let location = touch.location(in: self)
             
             if atPoint(location).name == "startGame" {
-                startButton.fontColor = UIColor.yellow
                 if let gameScene = GameScene(fileNamed: "GameScene") {
                     gameScene.scaleMode = .aspectFill
                     view?.presentScene(gameScene)
                 }
             }
-            //            else if atPoint(location).name == "settings" {
-            //                let settingsScene = SettingsScene(fileNamed: "SettingsScene")
-            //                settingsScene?.scaleMode = .aspectFill
-            //                view?.presentScene(settingsScene)
-            //            }
-            //            else if atPoint(location).name == "musicButton" {
-            //                // music button should work here
-            //            }
+            
+            if atPoint(location).name == "instructions" {
+                if let instructionsScene = InstructionsScene(fileNamed: "InstructionsScene") {
+                    instructionsScene.scaleMode = .aspectFill
+                    view?.presentScene(instructionsScene)
+                }
+            }
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+        background1?.Update(currentTime)
+        background2?.Update(currentTime)
     }
     
     

@@ -14,12 +14,10 @@ class Background : GameObject {
     }
     
     override func Start() {
-        //print(self.width)
-        //print("Screen Width: \(screenWidth)")
         
         
-        self.horizontalSpeed = 2.0
-        //self.Reset()
+        self.horizontalSpeed = 0.5
+      
     }
     
     override func Reset() {
@@ -30,13 +28,6 @@ class Background : GameObject {
     }
     
     override func CheckBounds() {
-        //if(self.position.y <= -772) {
-//        if(self.position.y <= -2108) {
-//            self.Reset()
-//        }
-//        if(self.position.x <= -2108) {
-//            self.Reset()
-//        }
         if(self.position.x <= -self.width!) {
             self.Reset()
         }

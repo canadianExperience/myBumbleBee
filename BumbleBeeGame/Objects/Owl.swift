@@ -43,7 +43,7 @@ class Owl : GameObject {
     
     override func Start() {
         self.verticalSpeed = 1
-        self.horizontalSpeed = 5.0
+        self.horizontalSpeed = 4.0
         self.zPosition = 2
         self.Reset()
     }

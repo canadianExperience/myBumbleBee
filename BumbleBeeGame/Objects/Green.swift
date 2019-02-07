@@ -15,7 +15,7 @@ class Green : GameObject {
     
     override func Start() {
         
-        self.horizontalSpeed = 8.0
+        self.horizontalSpeed = 2.0
         //self.Reset()
     }
     
