@@ -66,6 +66,15 @@
 		C0E5C821220B8BE5000B9B3A /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C803220B8BE5000B9B3A /* Icon-114.png */; };
 		C0E5C822220B8BE5000B9B3A /* Icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C804220B8BE5000B9B3A /* Icon-32.png */; };
 		C0E5C823220B8BE5000B9B3A /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C805220B8BE5000B9B3A /* Icon-512.png */; };
+		C0E5C827220BD610000B9B3A /* bee_pickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C824220BD610000B9B3A /* bee_pickup.mp3 */; };
+		C0E5C828220BD610000B9B3A /* bee_collide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C825220BD610000B9B3A /* bee_collide.mp3 */; };
+		C0E5C829220BD610000B9B3A /* bee.wav in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C826220BD610000B9B3A /* bee.wav */; };
+		C0E5C82C220BD61F000B9B3A /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C82A220BD61F000B9B3A /* button.mp3 */; };
+		C0E5C82D220BD61F000B9B3A /* buzz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C82B220BD61F000B9B3A /* buzz.mp3 */; };
+		C0E5C82F220BD62A000B9B3A /* nature.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C82E220BD62A000B9B3A /* nature.mp3 */; };
+		C0E5C831220BD632000B9B3A /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C830220BD632000B9B3A /* win.mp3 */; };
+		C0E5C833220BEA45000B9B3A /* time_expired.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C832220BEA45000B9B3A /* time_expired.mp3 */; };
+		C0E5C835220BEE51000B9B3A /* quit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0E5C834220BEE50000B9B3A /* quit.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +139,15 @@
 		C0E5C803220B8BE5000B9B3A /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
 		C0E5C804220B8BE5000B9B3A /* Icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-32.png"; sourceTree = "<group>"; };
 		C0E5C805220B8BE5000B9B3A /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
+		C0E5C824220BD610000B9B3A /* bee_pickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee_pickup.mp3; sourceTree = "<group>"; };
+		C0E5C825220BD610000B9B3A /* bee_collide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee_collide.mp3; sourceTree = "<group>"; };
+		C0E5C826220BD610000B9B3A /* bee.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bee.wav; sourceTree = "<group>"; };
+		C0E5C82A220BD61F000B9B3A /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
+		C0E5C82B220BD61F000B9B3A /* buzz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buzz.mp3; sourceTree = "<group>"; };
+		C0E5C82E220BD62A000B9B3A /* nature.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = nature.mp3; sourceTree = "<group>"; };
+		C0E5C830220BD632000B9B3A /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		C0E5C832220BEA45000B9B3A /* time_expired.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = time_expired.mp3; sourceTree = "<group>"; };
+		C0E5C834220BEE50000B9B3A /* quit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quit.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +180,15 @@
 		C02976A822014E53002AF02E /* BumbleBeeGame */ = {
 			isa = PBXGroup;
 			children = (
+				C0E5C825220BD610000B9B3A /* bee_collide.mp3 */,
+				C0E5C824220BD610000B9B3A /* bee_pickup.mp3 */,
+				C0E5C826220BD610000B9B3A /* bee.wav */,
+				C0E5C82A220BD61F000B9B3A /* button.mp3 */,
+				C0E5C82B220BD61F000B9B3A /* buzz.mp3 */,
+				C0E5C832220BEA45000B9B3A /* time_expired.mp3 */,
+				C0E5C834220BEE50000B9B3A /* quit.mp3 */,
+				C0E5C82E220BD62A000B9B3A /* nature.mp3 */,
+				C0E5C830220BD632000B9B3A /* win.mp3 */,
 				C02976C122014E6C002AF02E /* Objects */,
 				C02976A922014E53002AF02E /* AppDelegate.swift */,
 				C02976AF22014E53002AF02E /* GameScene.swift */,
@@ -317,6 +344,7 @@
 				C0E5C811220B8BE5000B9B3A /* Icon-180.png in Resources */,
 				C0E5C819220B8BE5000B9B3A /* Icon-172.png in Resources */,
 				C0E5C793220B66BB000B9B3A /* GameOverScene.sks in Resources */,
+				C0E5C833220BEA45000B9B3A /* time_expired.mp3 in Resources */,
 				C0E3E47F2208D9B1003B85CE /* BeeImages.atlas in Resources */,
 				C0E5C81F220B8BE5000B9B3A /* Icon-128.png in Resources */,
 				C02976E622014ED5002AF02E /* StartScene.sks in Resources */,
@@ -330,6 +358,7 @@
 				C0E3E4802208D9C3003B85CE /* BeeHitImages.atlas in Resources */,
 				C0E5C81E220B8BE5000B9B3A /* Icon-20.png in Resources */,
 				C0E3E4792208C39E003B85CE /* flower.png in Resources */,
+				C0E5C829220BD610000B9B3A /* bee.wav in Resources */,
 				C0E5C81D220B8BE5000B9B3A /* Icon-87.png in Resources */,
 				C0E5C821220B8BE5000B9B3A /* Icon-114.png in Resources */,
 				C0E5C81B220B8BE5000B9B3A /* Icon-40.png in Resources */,
@@ -337,13 +366,18 @@
 				C02976B722014E54002AF02E /* Assets.xcassets in Resources */,
 				C0E5C823220B8BE5000B9B3A /* Icon-512.png in Resources */,
 				C0E5C80E220B8BE5000B9B3A /* Icon-48.png in Resources */,
+				C0E5C831220BD632000B9B3A /* win.mp3 in Resources */,
 				C0E5C814220B8BE5000B9B3A /* Icon-72.png in Resources */,
 				C02976BA22014E54002AF02E /* LaunchScreen.storyboard in Resources */,
+				C0E5C82D220BD61F000B9B3A /* buzz.mp3 in Resources */,
 				C0E5C815220B8BE5000B9B3A /* Icon-196.png in Resources */,
 				C0E5C817220B8BE5000B9B3A /* Icon-57.png in Resources */,
 				C0A3F8F722089DCA0044FA46 /* sky.png in Resources */,
 				C0A3F8F922089DDF0044FA46 /* green.png in Resources */,
 				C0E5C80A220B8BE5000B9B3A /* Icon-88.png in Resources */,
+				C0E5C828220BD610000B9B3A /* bee_collide.mp3 in Resources */,
+				C0E5C835220BEE51000B9B3A /* quit.mp3 in Resources */,
+				C0E5C827220BD610000B9B3A /* bee_pickup.mp3 in Resources */,
 				C0E5C80B220B8BE5000B9B3A /* Icon-144.png in Resources */,
 				C02976AE22014E53002AF02E /* Actions.sks in Resources */,
 				C02976EE2201514F002AF02E /* owl.png in Resources */,
@@ -351,6 +385,8 @@
 				C0E5C810220B8BE5000B9B3A /* Icon-152.png in Resources */,
 				C0E5C807220B8BE5000B9B3A /* Icon-16.png in Resources */,
 				C0E5C813220B8BE5000B9B3A /* Icon-58.png in Resources */,
+				C0E5C82F220BD62A000B9B3A /* nature.mp3 in Resources */,
+				C0E5C82C220BD61F000B9B3A /* button.mp3 in Resources */,
 				C0E5C81A220B8BE5000B9B3A /* Icon-167.png in Resources */,
 				C0E5C816220B8BE5000B9B3A /* Icon-80.png in Resources */,
 				C0E5C822220B8BE5000B9B3A /* Icon-32.png in Resources */,

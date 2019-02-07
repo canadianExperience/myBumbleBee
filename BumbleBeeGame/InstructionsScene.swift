@@ -34,8 +34,15 @@ class InstructionsScene: SKScene {
             if atPoint(location).name == "backToMenu" {
                 if let startScene = StartScene(fileNamed: "StartScene") {
                     startScene.scaleMode = .aspectFill
-                    view?.presentScene(startScene)
+                    let action = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
+                    self.run(SKAction.sequence([
+                        action
+                        ])
+                    )
+                    view?.presentScene(startScene, transition: .doorsOpenVertical(withDuration: 1))
+                    
                 }
+                
             }
     
         }

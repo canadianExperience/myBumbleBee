@@ -15,6 +15,7 @@ class StartScene: SKScene {
     var startButton: SKLabelNode!
     var instructionsButton: SKLabelNode!
     var gameNameLabel: SKLabelNode!
+    var backgroundSound: SKAudioNode!
     
     let screenSize = UIScreen.main.bounds
     var scale: CGFloat = 0
@@ -42,7 +43,10 @@ class StartScene: SKScene {
         instructionsButton.zPosition = 3
         instructionsButton.fontName = "Futura-Bold"
         
-        
+        if let musicURL = Bundle.main.url(forResource: "nature", withExtension: "mp3") {
+            backgroundSound = SKAudioNode(url: musicURL)
+            addChild(backgroundSound)
+        }
         
         let image = UIImage(named: "sky")
         scale = CGFloat(screenSize.size.height) / CGFloat((image?.size.height)!)
@@ -61,7 +65,19 @@ class StartScene: SKScene {
         background2?.zPosition = 0
         addChild(background2!)
         
+//        startSound()
+        
     }
+    
+//    func startSound() {
+//        let action1 = SKAction.repeatForever(SKAction.playSoundFileNamed("nature.mp3", waitForCompletion: true))
+//        self.run(action1, withKey: "nature")
+//    }
+//
+//    func stopSound() {
+//        self.removeAllActions()
+//    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -70,18 +86,37 @@ class StartScene: SKScene {
             
             if atPoint(location).name == "startGame" {
                 if let gameScene = GameScene(fileNamed: "GameScene") {
+                   // backgroundSound.run(SKAction.stop())
                     gameScene.scaleMode = .aspectFill
-                    view?.presentScene(gameScene)
+//                    stopSound()
+                    let action2 = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
+                    self.run(SKAction.sequence([
+                        action2
+                        ])
+                    )
+                    view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 1))
+                    
                 }
             }
+        
+    
+
             
             if atPoint(location).name == "instructions" {
                 if let instructionsScene = InstructionsScene(fileNamed: "InstructionsScene") {
                     instructionsScene.scaleMode = .aspectFill
-                    view?.presentScene(instructionsScene)
+//                    stopSound()
+                    let action2 = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
+                    self.run(SKAction.sequence([
+                        action2
+                        ])
+                    )
+                    view?.presentScene(instructionsScene, transition: .doorsOpenVertical(withDuration: 1))
                 }
             }
         }
+    
+    
     }
     
     override func update(_ currentTime: TimeInterval) {

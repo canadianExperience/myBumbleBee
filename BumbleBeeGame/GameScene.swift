@@ -17,6 +17,8 @@ var scale: CGFloat = 0
 
 class GameScene: SKScene{
     
+    var backgroundSound: SKAudioNode!
+    
     var score = 0
     var highScore = 0
     var lives = 5
@@ -45,6 +47,11 @@ class GameScene: SKScene{
     var hitTotalRotateAngle: Double = 0.0
     
     override func didMove(to view: SKView) {
+        
+        if let musicURL = Bundle.main.url(forResource: "nature", withExtension: "mp3") {
+            backgroundSound = SKAudioNode(url: musicURL)
+            addChild(backgroundSound)
+        }
         
          highScore = UserDefaults.standard.integer(forKey: "topScore")
         
@@ -96,6 +103,13 @@ class GameScene: SKScene{
             bumbleBee!.animate()
         }
         
+//        let action1 = SKAction.wait(forDuration: 0.2)
+//        let action2 = SKAction.repeatForever(SKAction.playSoundFileNamed("bee.wav", waitForCompletion: true))
+//        self.run(SKAction.sequence([
+//            action1,
+//            action2
+//            ])
+//        )
         
         timerLabel = self.childNode(withName: "timer") as? SKLabelNode
         timerLabel?.text = "\(Int(timer))"
@@ -205,6 +219,15 @@ class GameScene: SKScene{
                 
                 self.removeAllActions()
                 
+                let action1 = SKAction.playSoundFileNamed("bee_collide.mp3", waitForCompletion: true)
+                //let action2 = SKAction.playSoundFileNamed("bee.wav", waitForCompletion: true)
+                                let action2 = SKAction.playSoundFileNamed("nature.mp3", waitForCompletion: true)
+                let action3 = SKAction.repeatForever(action2)
+                self.run(SKAction.sequence([
+                    action1,
+                    action3
+                    ]))
+                
                 if bumbleBee!.action(forKey: "hitInPlaceBee") == nil {
                     bumbleBee!.animateHit()
                     bumbleBee?.forceUp = -0.1
@@ -213,7 +236,7 @@ class GameScene: SKScene{
         
             // Collision BumbleBee and Flower
             if isCollision(bumbleBee, flower) {
-                
+                 self.run(SKAction.playSoundFileNamed("bee_pickup.mp3", waitForCompletion: false))
                 score += 1
                 flower?.position.x = -1000
             }

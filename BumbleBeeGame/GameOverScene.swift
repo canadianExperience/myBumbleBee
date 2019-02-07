@@ -45,10 +45,15 @@ class GameOverScene: SKScene{
         if isAlive && score > topScore {
             message = "You won"
             UserDefaults.standard.set(score, forKey: "topScore")
+             play("win")
+            
         } else if timeOut {
             message = "Time expired"
+            play("time_expired")
         } else {
             message = "Game over"
+            play("time_expired")
+           
         }
         
         messageLabel = self.childNode(withName: "message") as? SKLabelNode
@@ -62,38 +67,38 @@ class GameOverScene: SKScene{
         yourScoreLabel?.text = "Your Score: \(score)"
         yourScoreLabel?.verticalAlignmentMode = .center
         yourScoreLabel?.horizontalAlignmentMode = .center
-        yourScoreLabel?.position = CGPoint(x: -screenSize.width / 2 + 150, y: screenSize.size.height / 2 - 50)
+        yourScoreLabel?.position = CGPoint(x: -screenSize.width / 2 + 120, y: screenSize.size.height / 2 - 50)
        yourScoreLabel?.zPosition = 1
         
         topScoreLabel = self.childNode(withName: "topScore") as? SKLabelNode
         topScoreLabel?.text = "Top Score: \(topScore)"
         topScoreLabel?.verticalAlignmentMode = .center
         topScoreLabel?.horizontalAlignmentMode = .center
-        topScoreLabel?.position = CGPoint(x: screenSize.width / 2 - 150, y: screenSize.size.height / 2 - 50)
+        topScoreLabel?.position = CGPoint(x: screenSize.width / 2 - 120, y: screenSize.size.height / 2 - 50)
         topScoreLabel?.zPosition = 1
         
         menuButton = self.childNode(withName: "toStartScene") as? SKLabelNode
         menuButton?.text = "Main Menu"
         menuButton?.verticalAlignmentMode = .center
         menuButton?.horizontalAlignmentMode = .center
-        menuButton?.position = CGPoint(x: -screenSize.width / 2 + 150, y: -screenSize.size.height / 2 + 50)
+        menuButton?.position = CGPoint(x: -screenSize.width / 2 + 120, y: -screenSize.size.height / 2 + 50)
        menuButton?.zPosition = 1
         
         quitButton = self.childNode(withName: "quitGame") as? SKLabelNode
         quitButton?.text = "Quit Game"
         quitButton?.verticalAlignmentMode = .center
         quitButton?.horizontalAlignmentMode = .center
-        quitButton?.position = CGPoint(x: screenSize.width / 2 - 150, y:  -screenSize.size.height / 2 + 50)
+        quitButton?.position = CGPoint(x: screenSize.width / 2 - 120, y:  -screenSize.size.height / 2 + 50)
         quitButton?.zPosition = 1
         
         
     }
     
     
-//    func buttonSound() {
-//        let action1 = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
-//        self.run(action1)
-//    }
+    func buttonSound() {
+        let action = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
+        self.run(action)
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -103,15 +108,14 @@ class GameOverScene: SKScene{
             if atPoint(location).name == "toStartScene" {
                 if let startScene = StartScene(fileNamed: "StartScene") {
                     startScene.scaleMode = .aspectFill
-                    view?.presentScene(startScene)
-                   // buttonSound()
-//                    view?.presentScene(sartScene, transition: .doorsOpenVertical(withDuration: 2))
+                   // view?.presentScene(startScene)
+                   play("button")
+                    view?.presentScene(startScene, transition: .doorsOpenVertical(withDuration: 2))
                 }
             }
             
             if atPoint(location).name == "quitGame" {
-              //  buttonSound()
-                exit(0)
+                play("quit")
             }
         }
     }
@@ -121,7 +125,31 @@ class GameOverScene: SKScene{
         background1?.Update(currentTime)
         background2?.Update(currentTime)
     }
+    
+    func play(_ soundName: String) {
+        
+        // Play system sound with custom mp3 file
+        if let customSoundUrl = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
+            var customSoundId: SystemSoundID = 0
+            AudioServicesCreateSystemSoundID(customSoundUrl as CFURL, &customSoundId)
+            
+            if soundName == "quit" {
+                AudioServicesAddSystemSoundCompletion(customSoundId, nil, nil, soundFinished, nil)
+            }
+            AudioServicesPlaySystemSound(customSoundId)
+        }
+    }
 }
+
+//Play sound and then exit from app
+func soundFinished(_ snd:UInt32, _ c:UnsafeMutableRawPointer?) {
+    print("finished!")
+    AudioServicesRemoveSystemSoundCompletion(snd)
+    AudioServicesDisposeSystemSoundID(snd)
+    exit(0)
+}
+
+
 
 
 
