@@ -2,12 +2,14 @@ import SpriteKit
 import GameplayKit
 
 class Owl : GameObject {
-    var verticalSpeed: Float = 1
     
+    var verticalSpeed: Float = 1
     private var owlFrames: [SKTexture] = []
     
     // Initializers
     init() {
+        
+        // initialize the object with an image (animation)
         let owlAnimatedAtlas = SKTextureAtlas(named: "OwlImages")
         var frames: [SKTexture] = []
         
@@ -23,20 +25,11 @@ class Owl : GameObject {
         self.Start()
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+    
     // class functions
-    func animate() {
-        self.run(SKAction.repeatForever(
-            SKAction.animate(with: owlFrames,
-                             timePerFrame: 0.1,
-                             resize: false,
-                             restore: true)),
-                 withKey:"flyOwl")
-    }
     
     override func Start() {
         self.verticalSpeed = 1
@@ -74,5 +67,15 @@ class Owl : GameObject {
         self.position.y += CGFloat(verticalSpeed)
         self.position.x -= self.horizontalSpeed!
         self.CheckBounds()
+    }
+    
+    // animation, Owl is flying
+    func animate() {
+        self.run(SKAction.repeatForever(
+            SKAction.animate(with: owlFrames,
+                             timePerFrame: 0.1,
+                             resize: false,
+                             restore: true)),
+                 withKey:"flyOwl")
     }
 }

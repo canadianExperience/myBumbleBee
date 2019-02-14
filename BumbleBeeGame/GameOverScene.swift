@@ -9,22 +9,20 @@ class GameOverScene: SKScene{
     var topScore: Int = 0
     var timeOut: Bool = false
     var isAlive: Bool = true
-    
     var messageLabel: SKLabelNode?
     var yourScoreLabel: SKLabelNode?
     var topScoreLabel: SKLabelNode?
     var menuButton: SKLabelNode?
     var quitButton: SKLabelNode?
     var playAgainButton: SKLabelNode?
-    
     let screenSize = UIScreen.main.bounds
     var scale: CGFloat = 0
-    
     var background1: Background?
     var background2: Background?
     
     override func didMove(to view: SKView) {
         
+        //set background image
         let image = UIImage(named: "sky")
         scale = CGFloat(screenSize.size.height) / CGFloat((image?.size.height)!)
         
@@ -42,11 +40,13 @@ class GameOverScene: SKScene{
         background2?.zPosition = 0
         addChild(background2!)
         
+        // show win(lose) message and pay respective sounds (get parameters from Game Scene)
         var message = ""
         if isAlive && score > topScore {
             message = "You won"
+            // Score saves as a top score in UserDefaults
             UserDefaults.standard.set(score, forKey: "topScore")
-             play("win")
+            play("win")
             
         } else if timeOut {
             message = "Time expired"
@@ -54,8 +54,10 @@ class GameOverScene: SKScene{
         } else {
             message = "Game over"
             play("time_expired")
-           
+            
         }
+        
+        // set labels and buttons positions
         
         messageLabel = self.childNode(withName: "message") as? SKLabelNode
         messageLabel?.text = message
@@ -104,14 +106,7 @@ class GameOverScene: SKScene{
         playAgainButton?.position = CGPoint(x: 0, y:  -screenSize.size.height / 2 + 120)
         playAgainButton?.zPosition = 1
         playAgainButton?.fontName = "Futura-Bold"
-        
-        
-    }
-    
-    
-    func buttonSound() {
-        let action = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: true)
-        self.run(action)
+   
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -119,20 +114,22 @@ class GameOverScene: SKScene{
         for touch in touches {
             let location = touch.location(in: self)
             
+            // Play again button click action (move to Game scene)
             if atPoint(location).name == "playAgain" {
                 if let gameScene = StartScene(fileNamed: "GameScene") {
                     gameScene.scaleMode = .aspectFill
-                    // view?.presentScene(startScene)
+                    // play sound
                     play("button")
                     view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 2))
                 }
             }
             
+            // Menu button click action (move to Start scene)
             if atPoint(location).name == "toStartScene" {
                 if let startScene = StartScene(fileNamed: "StartScene") {
                     startScene.scaleMode = .aspectFill
-                   // view?.presentScene(startScene)
-                   play("button")
+                    // play sound
+                    play("button")
                     view?.presentScene(startScene, transition: .doorsOpenVertical(withDuration: 2))
                 }
             }
@@ -149,9 +146,10 @@ class GameOverScene: SKScene{
         background2?.Update(currentTime)
     }
     
+    // play system sound
     func play(_ soundName: String) {
         
-        // Play system sound with custom mp3 file
+        
         if let customSoundUrl = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
             var customSoundId: SystemSoundID = 0
             AudioServicesCreateSystemSoundID(customSoundUrl as CFURL, &customSoundId)
@@ -164,7 +162,7 @@ class GameOverScene: SKScene{
     }
 }
 
-//Play sound and then exit from app
+//play sound and then exit from app
 func soundFinished(_ snd:UInt32, _ c:UnsafeMutableRawPointer?) {
     print("finished!")
     AudioServicesRemoveSystemSoundCompletion(snd)

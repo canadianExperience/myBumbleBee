@@ -2,20 +2,20 @@ import SpriteKit
 import GameplayKit
 
 class GameObject : SKSpriteNode, GameProtocol {
+    
     // common GameObject variables
     var width: CGFloat?
     var height: CGFloat?
     var halfWidth: CGFloat?
     var halfHeight: CGFloat?
     var scale: CGFloat?
-    //var verticalSpeed: CGFloat?
     var horizontalSpeed: CGFloat?
     var randomSource: GKARC4RandomSource?
     var randomDist: GKRandomDistribution?
     
-    
     // Initializers
     init(imageString: String, initialScale: CGFloat) {
+        
         // initialize the GameObject with an image
         let texture = SKTexture(imageNamed: imageString)
         let color = UIColor.clear
@@ -30,8 +30,6 @@ class GameObject : SKSpriteNode, GameProtocol {
     }
     
     init(texture: SKTexture, initialScale: CGFloat) {
-        // initialize the GameObject with an image
-        //let texture = SKTexture(imageNamed: imageString)
         let color = UIColor.clear
         super.init(texture: texture, color: color, size: texture.size())
         setScale(initialScale)

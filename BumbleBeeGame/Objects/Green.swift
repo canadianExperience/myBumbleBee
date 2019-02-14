@@ -2,8 +2,10 @@ import SpriteKit
 import GameplayKit
 
 class Green : GameObject {
+    
     // Initializers
     init(_ scale: CGFloat) {
+        
         // initialize the object with an image
         super.init(imageString: "green", initialScale: scale)
         Start()
@@ -16,14 +18,12 @@ class Green : GameObject {
     override func Start() {
         
         self.horizontalSpeed = 2.0
-        //self.Reset()
     }
     
     override func Reset() {
         self.zPosition = 1
         let delta = self.position.x + self.width!
         self.position.x = self.width! + delta
-        
     }
     
     override func CheckBounds() {
@@ -33,9 +33,8 @@ class Green : GameObject {
     }
     
     override func Update(_ currentTime: TimeInterval) {
-    
+        
         self.position.x -= self.horizontalSpeed!
         self.CheckBounds()
     }
-    
 }

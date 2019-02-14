@@ -2,17 +2,20 @@ import SpriteKit
 import GameplayKit
 
 class BumbleBee : GameObject {
+    
     var forceUp: Float = 0
     let graviry: Float = 0.05
     var verticalSpeed: Float = 0
     var verticalForce: Float = 0
     
+    // set initial position
     var center: CGPoint = CGPoint(x: -screenSize.width/2 + 100, y: 0.0)
     
     private var beeFlyFrames: [SKTexture] = []
     private var beeHitFrames: [SKTexture] = []
     
     init() {
+        // initialize the object with an image (animation)
         let beeAnimatedAtlas = SKTextureAtlas(named: "BeeImages")
         var beeFrames: [SKTexture] = []
         
@@ -46,14 +49,10 @@ class BumbleBee : GameObject {
         self.zPosition = 2
     }
     
-    func getAngle(_ currentTime: TimeInterval) -> Double{
-        let integerPart = Int(currentTime)
-        let floatPart = currentTime - Double(integerPart)
-        let angle = 2 * Double.pi * floatPart
-        return angle
-    }
-    
     override func Update(_ currentTime: TimeInterval) {
+        
+        // BumbleBee movement
+        
         let angle = getAngle(currentTime)
         
         let xObj = 25 * CGFloat(sin(angle))
@@ -85,6 +84,15 @@ class BumbleBee : GameObject {
         self.position.x = self.center.x + xObj
     }
     
+    // Circle flying (get angle position)
+    func getAngle(_ currentTime: TimeInterval) -> Double{
+        let integerPart = Int(currentTime)
+        let floatPart = currentTime - Double(integerPart)
+        let angle = 2 * Double.pi * floatPart
+        return angle
+    }
+    
+    // animation, BumbleBee is flying
     func animate() {
         self.run(SKAction.repeatForever(
             SKAction.animate(with: beeFlyFrames,
@@ -94,6 +102,7 @@ class BumbleBee : GameObject {
                  withKey:"flyBee")
     }
     
+    // animation, BumbleBee is Hitting
     func animateHit() {
         self.run(SKAction.repeatForever(
             SKAction.animate(with: beeHitFrames,
