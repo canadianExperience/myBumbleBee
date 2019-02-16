@@ -1,10 +1,9 @@
-//
 //  StartScene.swift
-//  BumbleBeeGame
-//
 //  Created by Elena Melnikova on 2019-01-29.
+//  BumbleBeeGame
+//  Student ID: 301025880
+//  Description: "StartScene" displays main menu activity with the game name "BumbleBee", "Start Game" and "Instructions" buttons
 //  Copyright © 2019 Centennial College. All rights reserved.
-//
 
 import UIKit
 import SpriteKit
@@ -24,17 +23,29 @@ class StartScene: SKScene {
     override func didMove(to view: SKView) {
         
         // set labels and buttons
-        gameNameLabel = childNode(withName: "gameName") as! SKLabelNode
-        gameNameLabel.zPosition = 3
-        gameNameLabel.fontName = "Futura-Bold"
+        gameNameLabel = (childNode(withName: "gameName") as! SKLabelNode)
+        gameNameLabel?.position = CGPoint(x: 0, y: screenSize.size.height / 2 - screenSize.size.height / 3)
+        gameNameLabel?.text = "BumbleBee"
+        gameNameLabel?.zPosition = 1
+        gameNameLabel?.fontName = "Futura-Bold"
+        gameNameLabel?.fontColor = UIColor.yellow
+        gameNameLabel?.fontSize = 96.00
         
-        startButton = childNode(withName: "startGame") as! SKLabelNode
-        startButton.zPosition = 3
-        startButton.fontName = "Futura-Bold"
+        startButton = (childNode(withName: "startGame") as! SKLabelNode)
+        startButton?.position = CGPoint(x: 0, y: -screenSize.size.height / 2 + screenSize.size.height / 2.5)
+        startButton?.text = "Start Game"
+        startButton?.zPosition = 1
+        startButton?.fontName = "Futura-Bold"
+        startButton?.fontColor = UIColor.blue
+        startButton?.fontSize = 48.00
 
-        instructionsButton = childNode(withName: "instructions") as! SKLabelNode
-        instructionsButton.zPosition = 3
-        instructionsButton.fontName = "Futura-Bold"
+        instructionsButton = (childNode(withName: "instructions") as! SKLabelNode)
+        instructionsButton?.position = CGPoint(x: 0, y: -screenSize.size.height / 2 + screenSize.size.height / 5)
+        instructionsButton?.text = "Instructions"
+        instructionsButton?.zPosition = 1
+        instructionsButton?.fontName = "Futura-Bold"
+        instructionsButton?.fontColor = UIColor.blue
+        instructionsButton?.fontSize = 48.00
         
         //Background sound
         if let musicURL = Bundle.main.url(forResource: "nature", withExtension: "mp3") {

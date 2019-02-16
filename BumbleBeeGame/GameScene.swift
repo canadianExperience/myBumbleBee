@@ -1,10 +1,10 @@
-//
 //  GameScene.swift
-//  BumbleBeeGame
-//
 //  Created by Elena Melnikova on 2019-01-29.
+//  BumbleBeeGame
+//  Student ID: 301025880
+//  Description: "GameScene" displays game activity with a timer, scores and lives counting
 //  Copyright © 2019 Centennial College. All rights reserved.
-//
+
 
 import SpriteKit
 import GameplayKit
@@ -26,7 +26,7 @@ class GameScene: SKScene{
     var timer: TimeInterval = 60 //3*60
     var timeEnd: TimeInterval = 0
     var timerLabel: SKLabelNode?
-    var lifeLabel: SKLabelNode?
+    var livesLabel: SKLabelNode?
     var scoreLabel: SKLabelNode?
     var bumbleBee: BumbleBee?
     var background1: Background?
@@ -118,20 +118,26 @@ class GameScene: SKScene{
         timerLabel?.position = CGPoint(x: screenSize.width / 2 - 15, y: screenSize.size.height / 2 - 30)
         timerLabel?.zPosition = 3
         timerLabel?.fontName = "Futura-Bold"
+        timerLabel?.fontColor = UIColor.red
+        timerLabel?.fontSize = 24.0
         
         //life label
-        lifeLabel = self.childNode(withName: "life") as? SKLabelNode
-        lifeLabel?.text = "Life: \(Int(lives))"
-        lifeLabel?.position = CGPoint(x: screenSize.width / 2 - 90, y: screenSize.size.height / 2 - 30)
-        lifeLabel?.zPosition = 3
-        lifeLabel?.fontName = "Futura-Bold"
+        livesLabel = self.childNode(withName: "lives") as? SKLabelNode
+        livesLabel?.text = "Lives: \(Int(lives))"
+        livesLabel?.position = CGPoint(x: screenSize.width / 2 - 95, y: screenSize.size.height / 2 - 30)
+        livesLabel?.zPosition = 3
+        livesLabel?.fontName = "Futura-Bold"
+        livesLabel?.fontColor = UIColor.red
+        livesLabel?.fontSize = 24.0
         
         //score label
         scoreLabel = self.childNode(withName: "score") as? SKLabelNode
-        scoreLabel?.text = "Score: \(Int(score)) / \(Int(highScore))"
-        scoreLabel?.position = CGPoint(x: screenSize.width / 2 - 215, y: screenSize.size.height / 2 - 30)
+        scoreLabel?.text = "Score: \(Int(score))/\(Int(highScore))"
+        scoreLabel?.position = CGPoint(x: screenSize.width / 2 - 230, y: screenSize.size.height / 2 - 30)
         scoreLabel?.zPosition = 3
         scoreLabel?.fontName = "Futura-Bold"
+        scoreLabel?.fontColor = UIColor.red
+        scoreLabel?.fontSize = 24.0
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -142,19 +148,7 @@ class GameScene: SKScene{
         self.isPressed = false
     }
     
-    // Switch screen to Game over scene and send respective game parameters
-    func toGameOverScene(_ timeOut: Bool){
-        self.removeAllActions()
-        if let gameScene = GameOverScene(fileNamed: "GameOverScene") {
-            gameScene.scaleMode = .aspectFill
-            gameScene.score = score
-            gameScene.topScore = highScore
-            gameScene.timeOut = timeOut
-            gameScene.isAlive = lives > 0
-            view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 2))
-        }
-    }
-    
+
     
     override func update(_ currentTime: TimeInterval) {
         // move to Game over scene if time is over
@@ -261,10 +255,24 @@ class GameScene: SKScene{
         
         //set text to labels
         timerLabel?.text = "\(Int(timeEnd-currentTime))"
-        lifeLabel?.text = "Life: \(Int(lives))"
-        scoreLabel?.text = "Score: \(Int(score)) / \(Int(highScore))"
+        livesLabel?.text = "Lives: \(Int(lives))"
+        scoreLabel?.text = "Score: \(Int(score))/\(Int(highScore))"
         prevTime = currentTime
     }
+    
+    // Switch screen to Game over scene and send respective game parameters
+    func toGameOverScene(_ timeOut: Bool){
+        self.removeAllActions()
+        if let gameScene = GameOverScene(fileNamed: "GameOverScene") {
+            gameScene.scaleMode = .aspectFill
+            gameScene.score = score
+            gameScene.topScore = highScore
+            gameScene.timeOut = timeOut
+            gameScene.isAlive = lives > 0
+            view?.presentScene(gameScene, transition: .doorsOpenVertical(withDuration: 2))
+        }
+    }
+    
     
     // check flower coordinates. Flowers should not be overlaped
     func chechOverlap(_ index: Int, _ flower: Flower){
